@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MVCFrituurApplicatie_V3.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .float {
+        float: right;
+    }
+
+    body {
+        font-family: "Century Gothic", sans-serif;
+    }
+
+    .card {
+        background-color: black;
+        color: white;
+    }
+
+    .card2 {
+    }
+
+    .plus-button {
+        color: green;
+    }
+
+    .minus-button {
+        color: black;
+    }
+</style>
+
+<body style="background-color: black; color: white">
+    <h1>Menu</h1>
+    @foreach (var item in Model)
+{
+    <div class="card border-white mb-3" style="max-width: 40rem;">
+        <h2 class="card-header">
+            @Html.DisplayFor(modelItem => item.Name)
+            <div class=" float">
+                <h5 class="card-title">
+                    € @Html.DisplayFor(modelItem => item.Price)
+                </h5>
+            </div>
+        </h2>
+        <div class="card-body">
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Description)</h4>
+        </div>
+    </div>
+}
+</body>
+
+
+
+
+

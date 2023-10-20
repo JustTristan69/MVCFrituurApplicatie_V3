@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MVCFrituurApplicatie_V3.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    body {
+        font-family: "Century Gothic", sans-serif;
+    }
+</style>
+<body style="background-color: black; color: white">
+<div class="card border-info bg-black mb-3 text-center mx-auto" style="max-width: 60rem;">
+    <div class="card-header">Bedankt voor uw bestlling</div>
+    <div class="card-body">
+        <h4 class="card-title">Zie uw unieke code:</h4>
+        <p class="card-text"><h1 style="font-size:200px"><p id="Demo"></p></h1></p>
+    </div>
+        <button class="btn btn-primary" onclick="window.location.href = '..';">
+            <h2>Terug naar HOME MENU</h2>
+        </button>
+</div>
+</body>
+<script>
+    document.getElementById("Demo").innerHTML=Math.floor(Math.random()*100);
+</script>
+
+@*<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderregelId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderregelId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

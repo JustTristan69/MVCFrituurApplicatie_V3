@@ -1,0 +1,230 @@
+﻿
+@model IEnumerable<MVCFrituurApplicatie_V3.Models.Item>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .float {
+        float: right;
+    }
+
+    body {
+        font-family: "Century Gothic", sans-serif;
+    }
+
+    .card {
+        background-color: black;
+        color: white;
+    }
+
+    .card2 {
+    }
+
+    .plus-button {
+        color: green;
+    }
+
+    .minus-button {
+        color: black;
+    }
+</style>
+
+<body style="background-color: black; color: white">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card2 card2-registration card2-registration-2" style="border-radius: 15px; background-color: white;">
+                    <div class="card2-body p-0">
+                        <div class="row g-0">
+                            <div class="col-lg-8">
+                                <div class="p-5">
+                                    <div class="d-flex justify-content-between align-items-center mb-5">
+                                        <h1 class="fw-bold mb-0 text-black">Winkelwagen</h1>
+                                        <h6 class="mb-0 text-muted"><span id="total-item-count">0</span> items</h6>
+                                    </div>
+                                    <hr class="my-4">
+                                    <!-- Hier wordt de inhoud van de winkelwagen weergegeven -->
+                                    <div id="cart-content">
+                                        <!-- De items in de winkelwagen worden hier dynamisch weergegeven -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 bg-dark">
+                                <div class="p-5">
+                                    <h3 class="-1">Overzicht</h3>
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <h5 class="text-uppercase"><span id="total-item-count">0</span> items</h5>
+                                        <h5 id="total-price">€ 0.00</h5>
+                                    </div>
+                                    <h5 class="text-uppercase mb-3">Kortingscode</h5>
+                                    <div class="mb-5">
+                                        <div class="form-outline">
+                                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Examplea2">Vul hier uw kortingscode in</label>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <h5 class="text-uppercase">Total price</h5>
+                                        <h5 id="total-price">€ 0.00</h5>
+                                    </div>
+                                    <button class="btn btn-primary" id="bestellen-button" onclick="window.location.href = 'Afrekenen/Index';">
+                                        Betalen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<h1>Menu</h1>
+@foreach (var item in Model)
+{
+    <div class="card bg-dark mb-3" style="max-width: 40rem;">
+        <b>
+            <h2 class="card-header">
+                @Html.DisplayFor(modelItem => item.Name)
+                <div class=" float">
+                    <button class="btn btn-primary" onclick="addItemToCart('@Html.DisplayFor(modelItem => item.Name)', '@item.Price')">
+                        <h5 class="card-title">
+                            € @Html.DisplayFor(modelItem => item.Price) ( + )
+                        </h5>
+                    </button>
+                </div>
+            </h2>
+        </b>
+        <div class="card-body">
+            <h4><p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p></h4>
+        </div>
+    </div>
+}
+
+<script>
+    var cartItems = [];
+
+    function updateCart() {
+        var cartContent = document.getElementById("cart-content");
+        cartContent.innerHTML = "";
+        var totalPrice = 0.0;
+        cartItems.forEach(function (cartItem) {
+            var itemPrice = cartItem.price * cartItem.quantity;
+            totalPrice += itemPrice;
+
+            var cartRow = document.createElement("div");
+            cartRow.innerHTML = `
+                            <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <h6 class="text-muted">Product</h6>
+                                    <h6 class="text-black mb-0">${cartItem.name}</h6>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                    <button class="btn btn-link px-2 plus-button" style="color:black" onclick="decrementItem(this, '${cartItem.name}')">
+                                        <img src="https://cdn.discordapp.com/attachments/1015233182209159201/1162079710008848494/minus_1.png?ex=653aa211&is=65282d11&hm=724028bccb4c4f6df19d6766d0238e4cbb3bf72c226e391e96b59ead93e379ff">
+                                    </button>
+                                    <input min="0" name="quantity" style="width:60px" value="${cartItem.quantity}" type="number" class="form-control form-control-sm" disabled />
+                                    <button class="btn btn-link px-2 minus-button" style="color:black" onclick="incrementItem(this, '${cartItem.name}')">
+                                        <img src="https://cdn.discordapp.com/attachments/1015233182209159201/1162079709794947112/plus_2.png?ex=653aa211&is=65282d11&hm=6de1c71882a96da807761ef92de13f1798a964b04d7b436281236967436964f1">
+                                    </button>
+                                </div>
+                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                    <h6 class="mb-0 text-black">€ <span class="item-price">${itemPrice.toFixed(2)}</span></h6>
+                                </div>
+                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                    <button class="btn btn-link px-2" style="color:black" onclick="removeItem(this, '${cartItem.name}')">
+                                        <img src="https://cdn.discordapp.com/attachments/1015233182209159201/1162078833252515980/bin_1.png?ex=653aa140&is=65282c40&hm=5c4884e625e20f74067c94ce393ef6b0aafcd3bbf32660214fffc4dea33b90f5">
+                                    </button>
+                                </div>
+                            </div>
+                            <hr class="bg-black">
+                        `;
+            cartContent.appendChild(cartRow);
+        });
+
+        var totalElements = document.querySelectorAll("#total-price");
+        totalElements.forEach(function (element) {
+            element.textContent = `€ ${totalPrice.toFixed(2)}`;
+        });
+
+        var itemCountElements = document.querySelectorAll("#total-item-count");
+        itemCountElements.forEach(function (element) {
+            var itemCount = cartItems.reduce(function (total, item) {
+                return total + item.quantity;
+            }, 0);
+            element.textContent = itemCount;
+        });
+
+        localStorage.setItem("cartTotalPrice", totalPrice);
+    }
+
+    function addItemToCart(name, price) {
+        var priceValue = parseFloat(price.replace(',', '.')); // Converteer prijs met komma naar een drijvendekommagetal
+        var cartItem = cartItems.find(item => item.name === name && item.price === priceValue);
+        if (cartItem) {
+            cartItem.quantity++;
+        } else {
+            cartItem = {
+                name: name,
+                price: priceValue,
+                quantity: 1
+            };
+            cartItems.push(cartItem);
+        }
+        updateCart();
+    }
+
+
+
+
+    function incrementItem(element, name) {
+        var cartItem = cartItems.find(item => item.name === name);
+        if (cartItem) {
+            cartItem.quantity++;
+            updateCart();
+        }
+    }
+
+    function decrementItem(element, name) {
+        var cartItem = cartItems.find(item => item.name === name);
+        if (cartItem && cartItem.quantity > 0) {
+            cartItem.quantity--;
+            if (cartItem.quantity === 0) {
+                removeItem(element, name);
+            } else {
+                updateCart();
+            }
+        }
+    }
+
+    function removeItem(element, name) {
+        var index = cartItems.findIndex(item => item.name === name);
+        if (index !== -1) {
+            cartItems.splice(index, 1);
+            updateCart();
+        }
+    }
+
+   
+        // Verwijder de standaardactie van de "Bestellen" knop
+    var bestellenButton = document.querySelector("#bestellen-button");
+    bestellenButton.addEventListener("click", function (event) {
+        var totalPrice = 0;
+        cartItems.forEach(function (cartItem) {
+            totalPrice += cartItem.price * cartItem.quantity;
+        });
+        if (totalPrice === 0) {
+            // Als de totale prijs 0 is, toon een pop-upmelding
+            alert("Je kunt geen bestelling plaatsen zonder producten in de winkelwagen.");
+            event.preventDefault(); // Voorkom dat de standaardactie wordt uitgevoerd
+        }
+    });
+
+
+</script>

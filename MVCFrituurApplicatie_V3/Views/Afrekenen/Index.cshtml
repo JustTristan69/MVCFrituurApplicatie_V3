@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        font-family: "Century Gothic", sans-serif;
+    }
+</style>
+
+<body style="background-color: black; color: white">
+    <h1>Bevestig Je Bestelling</h1>
+    <div class="confirmation-container">
+        <h2>Selecteer je Bank</h2>
+        <select id="bank" name="bank">
+            <option value="0">-</option>
+            <option value="1">Rabobank</option>
+            <option value="2">ING</option>
+            <option value="3 Bank">SNS bank</option>
+            <option value="4">ABN AMRO</option>
+        </select>
+        <div class="items">
+            <!-- Hier worden de geselecteerde items weergegeven -->
+        </div>
+        <hr>
+        <h3 id="total-price">Totaalprijs: € 0.00</h3>
+        <button class="btn btn-primary" id="confirm-button" onclick="window.location.href='../Orders/Index'" >Bevestig Bestelling</button>
+    </div>
+</body>
+
+<script>
+        // Haal de totale prijs op uit het lokale opslaggeheugen
+        var storedTotalPrice = localStorage.getItem("cartTotalPrice");
+
+        if (storedTotalPrice) {
+            // Als er een opgeslagen totale prijs is, gebruik deze om de totale prijs weer te geven
+            var totalPriceElement = document.querySelector("#total-price");
+            totalPriceElement.textContent = `Totaalprijs: € ${storedTotalPrice}`;
+        } else {
+            // Als er geen opgeslagen totale prijs is, geef een standaardwaarde weer
+            var totalPriceElement = document.querySelector("#total-price");
+            totalPriceElement.textContent = "Totaalprijs: Onbekend";
+        }
+
+        // Wanneer op de "Bevestig Bestelling" knop wordt geklikt
+        var confirmButton = document.querySelector("#confirm-button");
+        confirmButton.addEventListener("click", function () {
+            alert("Bedankt voor je bestelling!");
+            // localStorage.removeItem("cartItems"); // Optioneel: verwijder de winkelwagen uit het lokale opslaggeheugen als dat nodig is
+            localStorage.removeItem("cartTotalPrice"); // Verwijder de totaalprijs uit het lokale opslaggeheugen
+            // Navigeer naar een bedankpagina of een andere gewenste locatie
+            // window.location.href = "link-naar-bedankpagina.html";
+        });
+    </script>
+

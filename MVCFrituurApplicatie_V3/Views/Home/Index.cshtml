@@ -1,0 +1,214 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+        html {
+            font-size: 14px;
+        }
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            margin-bottom: 60px;
+            background-color: black;
+            color: white;
+            font-family: Century Gothic;
+        }
+
+        * {
+            box-sizing: content-box; /* Stel box-sizing in op de standaardwaarde */
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .mySlides {
+            padding: 0;
+        }
+
+            .mySlides img {
+                /*width: 100%;*/
+                border-radius: 10px;
+            }
+
+        .card {
+            margin-bottom: 60px;
+            background-color: #1F1F1F; /* Achtergrondkleur van de kaart (lichtgrijs in dit geval) */
+            color: #FFFFFF; /* Tekstkleur van de kaart (donkergrijs in dit geval) */
+            padding: 13px; /* Ruimte rond de kaartinhoud */
+            border-radius: 10px; /* Afgeronde hoeken voor de kaart */
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap; /* Hierdoor worden kaarten naar de volgende rij verplaatst als ze niet in de container passen */
+            gap: 20px; /* Ruimte tussen de kaarten */
+            margin-bottom: 20px;
+            margin-top: 0px
+            
+        }
+
+
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 100px; /* Voeg hier de gewenste ruimte aan de onderkant toe */
+            margin: 20px;
+        }
+
+        .left-section {
+            flex: 1;
+            margin-bottom: 100px;
+        }
+
+        .middle-section {
+            flex: 1;
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .right-section {
+            flex: 1;
+            text-align: center;
+            margin-bottom: 100px;
+            margin-top: 10px;
+        }
+
+        .opening-hours {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="mySlides w3-display-container w3-center">
+        <img src="https://cdn.discordapp.com/attachments/1015233182209159201/1156933923440435340/image.png?ex=6516c62e&is=651574ae&hm=8f0ad2dd1b8b6fdd2e426489fb46277b26f6bc8a92f820104368b87e826701f2&/200/200" height="600" style="width: 100%">
+        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-0 w3-hide-small">
+        </div>
+    </div>
+    <div class="mySlides w3-display-container w3-center">
+        <img src="https://cdn.discordapp.com/attachments/1015233182209159201/1156936418329899058/image.png?ex=6516c880&is=65157700&hm=24f776e758d45c7a3694bf54628c2e32383cf548c1703df869f715043e751155&" height="600" style="width: 100%">
+        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-0 w3-hide-small">
+        </div>
+    </div>
+    <div class="mySlides w3-display-container w3-center">
+        <img src="https://cdn.discordapp.com/attachments/1015233182209159201/1157281415101153330/image.png?ex=651809ce&is=6516b84e&hm=0bec356795769a872b9948c0194abf4d19b8ecb8100c1859b84d40e45bc4a804&" height="600" width="1300">
+        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-0 w3-hide-small">
+        </div>
+    </div>
+    <br />
+    <br />
+    <hr /style ="margin-top: 5px;">
+    <h1>Populaire Items</h1>
+    <hr / style="margin-bottom: 5px;">
+    </div>
+    <div class="card-container" style="margin-top:20px">
+        <div class="card" style="width: 19rem; margin-left:80px; ">
+            <img class="card-img-top" src="https://www.trefpuntdaarlerveen.nl/wp-content/uploads/2017/03/patatje2-1024x614.jpg" height="200" alt="Card image cap; border-radius:20px;">
+            <div class="card-body">
+                <h5 class="card-title">Friet Mayonaise</h5>
+                <p class="card-text">Knapperige, goudbruine frietjes met een zijdezachte, huisgemaakte mayonaisedip.</p>
+                <a href="/Menu/Index" class="btn btn-primary">Ga naar Menu</a>
+            </div>
+        </div>
+        <div class="card" style="width: 19rem; margin-left:30px;">
+            <img class="card-img-top" src="https://i.pinimg.com/originals/fd/d9/9f/fdd99fce89a5bb8279cfb36bc9eed761.jpg" height="200" alt="Card image cap; border-radius:20px">
+            <div class="card-body">
+                <h5 class="card-title">Frikandel Naturel</h5>
+                <p class="card-text">Een smaakvolle, hartige frikandel,geserveerd met diverse sauzen.</p>
+                <a href="/Menu/Index" class="btn btn-primary">Ga naar Menu</a>
+            </div>
+        </div>
+        <div class="card" style="width: 19rem; margin-left:30px;">
+            <img class="card-img-top" src="https://www.desmulhoek-lommel.be/media/images/catalog/article/495/big/180.png" height="200" alt="Card image cap; border-radius:20px">
+            <div class="card-body">
+                <h5 class="card-title">Friet Zuurvlees</h5>
+                <p class="card-text">Gouden frietjes, bedekt met een rijke, zoetzure stoofpot van mals Limburgs rundvlees. </p>
+                <a href="/Menu/Index" class="btn btn-primary">Ga naar Menu</a>
+            </div>
+        </div>
+        <div class="card" style="width: 19rem; margin-left:30px;">
+            <img class="card-img-top" src="https://1.bp.blogspot.com/-F6yvHd8TL3M/VN4wVw3HFbI/AAAAAAAAACo/0cJg9BaZjjE/s1600/frietjes-ketchup.jpg" height="200" alt="Card image cap; border-radius:20px">
+            <div class="card-body">
+                <h5 class="card-title">Friet Kurry</h5>
+                <p class="card-text">Heerlijke frietjes geserveerd met een kruidige, aromatische currytopping. </p>
+                <a href="/Menu/Index" class="btn btn-primary">Ga naar Menu</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <hr />
+    <h1 style="margin-left:50px;">Contact </h1>
+    <hr />
+
+    <div class="contact-container">
+        <div class="left-section">
+            <img src="https://www.man-architecten.be/files/index/projectpictures/large/2488.jpg" height="350" width="350" style="border-radius:10px">
+        </div>
+        <div class="middle-section">
+            <h2>Over ons</h2>
+            <p>Wij zijn een gezellige frituurzaak die al jarenlang de lekkerste snacks en friet serveert. Kom langs en proef onze specialiteiten!</p>
+            <div class="opening-hours" style="font-size:14px">
+                <h3>Openingstijden:</h3>
+                <p>Maandag: 11:00 - 21:00</p>
+                <p>Dinsdag: 11:00 - 21:00</p>
+                <p>Woensdag: 11:00 - 21:00</p>
+                <p>Donderdag: 11:00 - 21:00</p>
+                <p>Vrijdag: 11:00 - 22:00</p>
+                <p>Zaterdag: 12:00 - 22:00</p>
+                <p>Zondag: Gesloten</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <h2 style="margin-top:0px;"> Contactgegevens</h2>
+            <br />
+            <p>Adres: Straatnaam 123</p>
+            <p>Postcode: 1234 AB Plaatsnaam</p>
+            <p>Telefoon: 0123-456789</p>
+            <p>Email: info@HetSmikkelhoekje.nl</p>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </div>
+    </div>
+
+    </div>
+
+</body>
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 5000);
+    }
+</script>
+</html>
